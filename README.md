@@ -116,24 +116,7 @@ A linguagem C- é um subconjunto simplificado de C, contendo:
 - Compilador C (GCC, Clang, MSVC)
 - Sistema operacional: Linux, macOS, Windows
 
-## 📄 Licença
-
-Este projeto é de código aberto e está disponível para fins educacionais.
-
-## 👨‍💻 Autor
-
-Desenvolvido como projeto acadêmico de Compiladores.
-
-## 🤝 Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para:
-- Reportar bugs
-- Sugerir novas funcionalidades
-- Melhorar a documentação
-
 ## 📚 Referências
 
 - Louden, Kenneth C. "Compiler Construction: Principles and Practice"
 - Aho, Alfred V. et al. "Compilers: Principles, Techniques, and Tools" (Dragon Book)
-
----

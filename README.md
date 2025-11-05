@@ -1,2 +1,171 @@
-# Compilador-C-
-Scanner/analisador léxico para linguagem C-. Lê arquivo fonte e identifica tokens: palavras reservadas (if, else, int, return, void, while), identificadores, números, operadores (+, -, , /, &lt;, &lt;=, >, >=, ==, !=, =), delimitadores (;, ,, (), [], {}), ignora comentários / */. Exibe linha, tipo do token e lexema para cada marca reconhecida.
+# Scanner para Linguagem C-
+
+Um analisador léxico (scanner) completo para a linguagem C-, desenvolvido em C. O programa identifica e classifica todos os tokens da linguagem, exibindo tipo e lexema de cada marca reconhecida.
+
+## 📋 Descrição
+
+Este projeto implementa a primeira fase de um compilador: a análise léxica. O scanner lê um arquivo fonte em C- e quebra o código em tokens (marcas), identificando palavras reservadas, identificadores, números, operadores e símbolos especiais.
+
+## ✨ Funcionalidades
+
+- **Palavras Reservadas**: `if`, `else`, `int`, `return`, `void`, `while`
+- **Identificadores**: sequências alfanuméricas iniciadas por letra
+- **Números**: sequências de dígitos
+- **Operadores Aritméticos**: `+`, `-`, `*`, `/`
+- **Operadores Relacionais**: `<`, `<=`, `>`, `>=`, `==`, `!=`
+- **Operador de Atribuição**: `=`
+- **Delimitadores**: `;`, `,`, `(`, `)`, `[`, `]`, `{`, `}`
+- **Comentários**: `/* ... */` (ignorados durante análise)
+- **Contagem de Linhas**: rastreamento da posição de cada token
+
+## 🚀 Como Usar
+
+### Compilação
+
+**Linux/macOS:**
+```bash
+gcc -o scanner scanner.c
+```
+
+**Windows (MinGW/GCC):**
+```bash
+gcc -o scanner.exe scanner.c
+```
+
+**Windows (Visual Studio):**
+```bash
+cl scanner.c
+```
+
+### Execução
+
+**Linux/macOS:**
+```bash
+./scanner arquivo.cm
+```
+
+**Windows:**
+```bash
+scanner.exe arquivo.cm
+```
+
+## 📝 Exemplo de Uso
+
+### Arquivo de entrada (`teste.cm`):
+```c
+int fatorial(int n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * fatorial(n - 1);
+    }
+}
+
+int main(void) {
+    int x;
+    x = 5;
+    return fatorial(x);
+}
+```
+
+### Comando:
+```bash
+./scanner teste.cm
+```
+
+### Saída:
+```
+========================================
+ANALISADOR LÉXICO - LINGUAGEM C-
+========================================
+Arquivo: teste.cm
+
+Linha  Tipo            Lexema
+========================================
+1      INT             int
+1      ID              fatorial
+1      LPAREN          (
+1      INT             int
+1      ID              n
+1      RPAREN          )
+1      LBRACE          {
+2      IF              if
+2      LPAREN          (
+2      ID              n
+2      LE              <=
+2      NUM             1
+2      RPAREN          )
+2      LBRACE          {
+3      RETURN          return
+3      NUM             1
+3      SEMICOLON       ;
+4      RBRACE          }
+...
+```
+
+## 🛠️ Estrutura do Código
+
+```
+scanner.c
+├── Tipos de Tokens (TokenType enum)
+├── Estrutura Token
+├── Funções principais:
+│   ├── init_scanner()      - Inicializa o scanner
+│   ├── get_token()         - Obtém próximo token
+│   ├── skip_whitespace()   - Ignora espaços
+│   ├── skip_comment()      - Ignora comentários
+│   └── check_keyword()     - Verifica palavras reservadas
+└── main()                  - Função principal
+```
+
+## 📊 Tipos de Tokens
+
+| Categoria | Tokens |
+|-----------|--------|
+| Palavras Reservadas | `if`, `else`, `int`, `return`, `void`, `while` |
+| Identificadores | `ID` |
+| Literais | `NUM` |
+| Operadores Aritméticos | `+`, `-`, `*`, `/` |
+| Operadores Relacionais | `<`, `<=`, `>`, `>=`, `==`, `!=` |
+| Atribuição | `=` |
+| Pontuação | `;`, `,` |
+| Delimitadores | `(`, `)`, `[`, `]`, `{`, `}` |
+
+## 🔍 Gramática da Linguagem C-
+
+A linguagem C- é um subconjunto simplificado de C, contendo:
+- Dois tipos de dados: `int` e `void`
+- Estruturas de controle: `if-else` e `while`
+- Funções com parâmetros
+- Arrays unidimensionais
+- Operações aritméticas e relacionais
+- Comentários de bloco
+
+## ⚙️ Requisitos
+
+- Compilador C (GCC, Clang, MSVC)
+- Sistema operacional: Linux, macOS, Windows
+
+## 📄 Licença
+
+Este projeto é de código aberto e está disponível para fins educacionais.
+
+## 👨‍💻 Autor
+
+Desenvolvido como projeto acadêmico de Compiladores.
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+- Reportar bugs
+- Sugerir novas funcionalidades
+- Melhorar a documentação
+
+## 📚 Referências
+
+- Louden, Kenneth C. "Compiler Construction: Principles and Practice"
+- Aho, Alfred V. et al. "Compilers: Principles, Techniques, and Tools" (Dragon Book)
+
+---
+
+⭐ Se este projeto foi útil, considere dar uma estrela!

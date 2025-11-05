@@ -73,36 +73,6 @@ int main(void) {
 ./scanner teste.cm
 ```
 
-### Saída:
-```
-========================================
-ANALISADOR LÉXICO - LINGUAGEM C-
-========================================
-Arquivo: teste.cm
-
-Linha  Tipo            Lexema
-========================================
-1      INT             int
-1      ID              fatorial
-1      LPAREN          (
-1      INT             int
-1      ID              n
-1      RPAREN          )
-1      LBRACE          {
-2      IF              if
-2      LPAREN          (
-2      ID              n
-2      LE              <=
-2      NUM             1
-2      RPAREN          )
-2      LBRACE          {
-3      RETURN          return
-3      NUM             1
-3      SEMICOLON       ;
-4      RBRACE          }
-...
-```
-
 ## 🛠️ Estrutura do Código
 
 ```
@@ -167,5 +137,3 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - Aho, Alfred V. et al. "Compilers: Principles, Techniques, and Tools" (Dragon Book)
 
 ---
-
-⭐ Se este projeto foi útil, considere dar uma estrela!

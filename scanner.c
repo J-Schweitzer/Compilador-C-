@@ -3,16 +3,12 @@
 #include <string.h>
 #include <ctype.h>
 
-// Tipos de tokens
 typedef enum {
-    // Palavras reservadas
     TOKEN_IF, TOKEN_ELSE, TOKEN_INT, TOKEN_RETURN, 
     TOKEN_VOID, TOKEN_WHILE,
     
-    // Identificadores e números
     TOKEN_ID, TOKEN_NUM,
     
-    // Operadores e símbolos especiais
     TOKEN_PLUS, TOKEN_MINUS, TOKEN_MULT, TOKEN_DIV,
     TOKEN_LT, TOKEN_LE, TOKEN_GT, TOKEN_GE,
     TOKEN_EQ, TOKEN_NE, TOKEN_ASSIGN,
@@ -21,23 +17,19 @@ typedef enum {
     TOKEN_LBRACKET, TOKEN_RBRACKET,
     TOKEN_LBRACE, TOKEN_RBRACE,
     
-    // Especiais
     TOKEN_EOF, TOKEN_ERROR
 } TokenType;
 
-// Estrutura do token
 typedef struct {
     TokenType type;
     char lexeme[256];
     int line;
 } Token;
 
-// Variáveis globais
 FILE *source;
 int line_num = 1;
 char current_char;
 
-// Protótipos
 void init_scanner(const char *filename);
 char get_next_char();
 void unget_char(char c);
@@ -61,7 +53,6 @@ void init_scanner(const char *filename) {
     current_char = ' ';
 }
 
-// Lê o próximo caractere
 char get_next_char() {
     char c = fgetc(source);
     if (c == '\n') {
@@ -70,7 +61,6 @@ char get_next_char() {
     return c;
 }
 
-// Devolve um caractere
 void unget_char(char c) {
     if (c == '\n') {
         line_num--;
@@ -78,14 +68,12 @@ void unget_char(char c) {
     ungetc(c, source);
 }
 
-// Pula espaços em branco
 void skip_whitespace() {
     while (isspace(current_char)) {
         current_char = get_next_char();
     }
 }
 
-// Pula comentários
 void skip_comment() {
     if (current_char == '/') {
         char next = get_next_char();
@@ -117,13 +105,11 @@ TokenType check_keyword(const char *str) {
     return TOKEN_ID;
 }
 
-// Obtém o próximo token
 Token get_token() {
     Token token;
     token.line = line_num;
     token.lexeme[0] = '\0';
     
-    // Pula espaços e comentários
     while (1) {
         skip_whitespace();
         if (current_char == '/') {
@@ -139,7 +125,6 @@ Token get_token() {
         }
     }
     
-    // EOF
     if (current_char == EOF) {
         token.type = TOKEN_EOF;
         strcpy(token.lexeme, "EOF");
@@ -158,7 +143,6 @@ Token get_token() {
         return token;
     }
     
-    // Números
     if (isdigit(current_char)) {
         int i = 0;
         while (isdigit(current_char)) {
@@ -286,7 +270,6 @@ Token get_token() {
     return token;
 }
 
-// Converte tipo de token para string
 const char* token_type_to_string(TokenType type) {
     switch (type) {
         case TOKEN_IF: return "IF";
@@ -322,7 +305,6 @@ const char* token_type_to_string(TokenType type) {
     }
 }
 
-// Função principal
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Uso: %s <arquivo_fonte>\n", argv[0]);
@@ -330,13 +312,6 @@ int main(int argc, char *argv[]) {
     }
     
     init_scanner(argv[1]);
-    
-    printf("========================================\n");
-    printf("ANALISADOR LÉXICO - LINGUAGEM C-\n");
-    printf("========================================\n");
-    printf("Arquivo: %s\n\n", argv[1]);
-    printf("%-6s %-15s %s\n", "Linha", "Tipo", "Lexema");
-    printf("========================================\n");
     
     Token token;
     do {
@@ -348,4 +323,5 @@ int main(int argc, char *argv[]) {
     
     fclose(source);
     return 0;
+
 }
